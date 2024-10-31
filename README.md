@@ -4,7 +4,7 @@
   <img src="public/demo.png" alt="JSON Parser Demo" width="800"/>
 </p>
 
-A modern, user-friendly JSON parser and formatter built with Next.js and TypeScript. Try it out at [demo link].
+A modern, user-friendly JSON parser and formatter built with Next.js and TypeScript. Try it out at [[demo link](https://json.pengzhang.net/)].
 
 [![GitHub stars](https://img.shields.io/github/stars/luckzp/json-parser?style=social)](https://github.com/luckzp/json-parser)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)

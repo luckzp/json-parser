@@ -183,7 +183,7 @@ export default function JsonParser() {
                 onClick={() => {
                   try {
                     // 处理输入字符串
-                    let processedInput = input.replace(/\\"/g, '"');
+                    const processedInput = input.replace(/\\"/g, '"');
                     setInput(processedInput);
                     parseJson(processedInput);
                   } catch (e) {

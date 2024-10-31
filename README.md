@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# JSON Parser
 
-## Getting Started
+<p align="center">
+  <img src="public/demo.png" alt="JSON Parser Demo" width="800"/>
+</p>
 
-First, run the development server:
+A modern, user-friendly JSON parser and formatter built with Next.js and TypeScript. Try it out at [demo link].
+
+[![GitHub stars](https://img.shields.io/github/stars/luckzp/json-parser?style=social)](https://github.com/luckzp/json-parser)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## ✨ Features
+
+- 🚀 Real-time JSON parsing and validation
+- 🎨 Beautiful syntax highlighting
+- 📦 Collapsible JSON tree view
+- 🔄 Auto-format JSON data
+- 💾 Download parsed JSON as file
+- 📋 Copy formatted JSON to clipboard
+- 🛠 Automatic escape character handling
+- 🎯 User-friendly error messages
+
+## 🖥 Demo
+
+<p align="center">
+  <img src="public/features.gif" alt="Features Demo" width="800"/>
+</p>
+
+## 🚀 Getting Started
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/luckzp/json-parser.git
+```
+
+2. Install dependencies:
+
+```bash
+cd json-parser
+npm install
+```
+
+3. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠 Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Enter or paste your JSON data into the left panel
+2. The parser will automatically validate and format your input
+3. Use the collapse/expand buttons to navigate through nested structures
+4. Download or copy the formatted JSON using the toolbar buttons
 
-## Learn More
+## 🎨 Technologies
 
-To learn more about Next.js, take a look at the following resources:
+- [Next.js 14](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [shadcn/ui](https://ui.shadcn.com/)
+- [Lucide Icons](https://lucide.dev/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🤝 Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Contributions, issues and feature requests are welcome! Feel free to check the [issues page](https://github.com/luckzp/json-parser/issues).
 
-## Deploy on Vercel
+## ⭐️ Show your support
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Give a ⭐️ if this project helped you! Your support motivates me to maintain and improve this tool.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📝 License
+
+This project is [MIT](LICENSE) licensed.
+
+---
+
+Made with ❤️ by [Your Name](https://github.com/luckzp)

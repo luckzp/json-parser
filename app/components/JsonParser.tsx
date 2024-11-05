@@ -136,7 +136,19 @@ export default function JsonParser() {
 
       // 2. 尝试去除转义字符后解析
       try {
-        const unescaped = trimmed.replace(/\\"/g, '"');
+        const unescaped = trimmed.replace(/\\(["\\/bfnrt])/g, (_, char) => {
+          const escapeMap: { [key: string]: string } = {
+            '"': '"', // 双引号
+            "\\": "\\", // 反斜杠
+            "/": "/", // 斜杠
+            b: "\b", // 退格
+            f: "\f", // 换页
+            n: "\n", // 换行
+            r: "\r", // 回车
+            t: "\t", // 制表符
+          };
+          return escapeMap[char] || char;
+        });
         const parsed = JSON.parse(unescaped);
         setParsedData(parsed);
         setError(null);
@@ -183,7 +195,22 @@ export default function JsonParser() {
                 onClick={() => {
                   try {
                     // 处理输入字符串
-                    const processedInput = input.replace(/\\"/g, '"');
+                    const processedInput = input.replace(
+                      /\\(["\\/bfnrt])/g,
+                      (_, char) => {
+                        const escapeMap: { [key: string]: string } = {
+                          '"': '"', // 双引号
+                          "\\": "\\", // 反斜杠
+                          "/": "/", // 斜杠
+                          b: "\b", // 退格
+                          f: "\f", // 换页
+                          n: "\n", // 换行
+                          r: "\r", // 回车
+                          t: "\t", // 制表符
+                        };
+                        return escapeMap[char] || char;
+                      }
+                    );
                     setInput(processedInput);
                     parseJson(processedInput);
                   } catch (e) {

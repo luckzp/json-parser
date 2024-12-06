@@ -9,7 +9,7 @@ import {
   faMinusSquare,
   faPlusSquare,
 } from "@fortawesome/free-regular-svg-icons";
-
+import TimestampConverter from "./timestamp-converter";
 interface JsonViewerProps {
   data: any;
   level: number;
@@ -174,13 +174,17 @@ export default function JsonParser() {
     <div className="flex flex-col h-screen bg-white">
       {/* 标题区域 - 与主内容区域保持相同的宽度和对齐方式 */}
       <div className="w-full pt-6  px-12">
-        <div className="w-3/4 mx-auto">
-          {" "}
+        <div className="w-3/4 mx-auto flex justify-between">
           {/* 使用与主内容区域相同的宽度 */}
-          <h1 className="text-2xl font-semibold text-gray-800">JSON Parser</h1>
-          <p className="text-sm text-gray-600 mt-1">
-            A tool for parsing and formatting JSON data
-          </p>
+          <div>
+            <h1 className="text-2xl font-semibold text-gray-800">
+              JSON Parser
+            </h1>
+            <p className="text-sm text-gray-600 mt-1">
+              A tool for parsing and formatting JSON data
+            </p>
+          </div>
+          <TimestampConverter />
         </div>
       </div>
 

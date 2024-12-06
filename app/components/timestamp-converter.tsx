@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -39,7 +38,7 @@ export default function TimestampConverter() {
       };
 
       setConvertedTime(date.toLocaleString("zh-CN", options));
-    } catch (error) {
+    } catch {
       setConvertedTime("Invalid timestamp");
     }
   }, [timestamp, timezone]);

@@ -134,18 +134,30 @@ export default function JsonParser() {
         // 如果正常解析失败，继续下一步
       }
 
-      // 2. 尝试去除转义字符后解析
+      // 2. 尝试将单引号替换为双引号并解析
+      try {
+        // 替换未转义的单引号为双引号，但保留已转义的单引号
+        const doubleQuoted = trimmed.replace(/(?<!\\)'/g, '"');
+        const parsed = JSON.parse(doubleQuoted);
+        setParsedData(parsed);
+        setError(null);
+        return;
+      } catch {
+        // 如果替换单引号后解析失败，继续下一步
+      }
+
+      // 3. 尝试去除转义字符后解析
       try {
         const unescaped = trimmed.replace(/\\(["\\/bfnrt])/g, (_, char) => {
           const escapeMap: { [key: string]: string } = {
-            '"': '"', // 双引号
-            "\\": "\\", // 反斜杠
-            "/": "/", // 斜杠
-            b: "\b", // 退格
-            f: "\f", // 换页
-            n: "\n", // 换行
-            r: "\r", // 回车
-            t: "\t", // 制表符
+            '"': '"',
+            "\\": "\\",
+            "/": "/",
+            b: "\b",
+            f: "\f",
+            n: "\n",
+            r: "\r",
+            t: "\t",
           };
           return escapeMap[char] || char;
         });
@@ -157,7 +169,7 @@ export default function JsonParser() {
         // 如果去除转义后解析还是失败，继续下一步
       }
 
-      // 3. 如果上述都失败，抛出原始错误
+      // 4. 如果上述都失败，抛出原始错误
       throw new Error("Invalid JSON format");
     } catch (e) {
       setError((e as Error).message);

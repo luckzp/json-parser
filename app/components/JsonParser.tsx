@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "@/components/ui/button";
 import { FileJson2, FileDown, Copy } from "lucide-react";
-
+import { parseJsonString } from "@/app/utils/jsonParser";
 import {
   faMinusSquare,
   faPlusSquare,
@@ -116,65 +116,9 @@ export default function JsonParser() {
   const [error, setError] = useState<string | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const parseJson = (content: string) => {
-    try {
-      const trimmed = content.trim();
-      if (!trimmed) {
-        setParsedData(null);
-        setError(null);
-        return;
-      }
-
-      // 1. 先尝试正常解析
-      try {
-        const parsed = JSON.parse(trimmed);
-        setParsedData(parsed);
-        setError(null);
-        return;
-      } catch {
-        // 如果正常解析失败，继续下一步
-      }
-
-      // 2. 尝试将单引号替换为双引号并解析
-      try {
-        // 替换未转义的单引号为双引号，但保留已转义的单引号
-        const doubleQuoted = trimmed.replace(/(?<!\\)'/g, '"');
-        const parsed = JSON.parse(doubleQuoted);
-        setParsedData(parsed);
-        setError(null);
-        return;
-      } catch {
-        // 如果替换单引号后解析失败，继续下一步
-      }
-
-      // 3. 尝试去除转义字符后解析
-      try {
-        const unescaped = trimmed.replace(/\\(["\\/bfnrt])/g, (_, char) => {
-          const escapeMap: { [key: string]: string } = {
-            '"': '"',
-            "\\": "\\",
-            "/": "/",
-            b: "\b",
-            f: "\f",
-            n: "\n",
-            r: "\r",
-            t: "\t",
-          };
-          return escapeMap[char] || char;
-        });
-        const parsed = JSON.parse(unescaped);
-        setParsedData(parsed);
-        setError(null);
-        return;
-      } catch {
-        // 如果去除转义后解析还是失败，继续下一步
-      }
-
-      // 4. 如果上述都失败，抛出原始错误
-      throw new Error("Invalid JSON format");
-    } catch (e) {
-      setError((e as Error).message);
-      setParsedData(null);
-    }
+    const { data, error } = parseJsonString(content);
+    setParsedData(data);
+    setError(error);
   };
 
   useEffect(() => {

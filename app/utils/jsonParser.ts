@@ -6,29 +6,54 @@ export const parseJsonString = (content: string) => {
     if (!trimmed) {
       return { data: null, error: null };
     }
+    
+    // Helper function to try parsing JSON strings
+    const tryParse = (str: string) => {
+      try {
+        return JSON.parse(str);
+      } catch {
+        // If it's not valid JSON, return the original string
+        return str;
+      }
+    };
 
-    // 1. 先尝试正常解析
+    // Process nested JSON strings recursively
+    const processNestedJson = (obj: any): any => {
+      if (typeof obj === 'string') {
+        return tryParse(obj);
+      }
+      
+      if (typeof obj === 'object' && obj !== null) {
+        const result: any = Array.isArray(obj) ? [] : {};
+        for (const key in obj) {
+          result[key] = processNestedJson(obj[key]);
+        }
+        return result;
+      }
+      
+      return obj;
+    };
+
+    // 1. First try normal parsing
     try {
-      // 保留转义
       const parsed = JSON.parse(trimmed);
-      return { data: parsed, error: null };
-    } catch {
-      // 如果正常解析失败，继续下一步
-      console.log("正常解析失败");
+      return { data: processNestedJson(parsed), error: null };
+    } catch (e) {
+      console.log("Normal parsing failed:", e);
     }
 
-    // 2. 使用 jsonrepair 修复
+    // 2. Try using jsonrepair if normal parsing fails
     try {
       const repaired = jsonrepair(trimmed);
       const parsed = JSON.parse(repaired);
-      return { data: parsed, error: null };
-    } catch {
-      console.log("jsonrepair 修复失败");
+      return { data: processNestedJson(parsed), error: null };
+    } catch (e) {
+      console.log("jsonrepair failed:", e);
     }
 
-    // 4. 如果上述都失败，抛出原始错误
+    // 3. If all attempts fail, throw error
     throw new Error("Invalid JSON format");
   } catch (e) {
     return { data: null, error: (e as Error).message };
   }
-}; 
+};

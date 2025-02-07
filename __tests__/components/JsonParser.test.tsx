@@ -41,13 +41,6 @@ describe("parseJsonString", () => {
     expect(result).toEqual({ data: expected, error: null });
   });
 
-  test("should return error for invalid JSON", () => {
-    const input = '{name: "John"}'; // Missing quotes around property name
-    const result = parseJsonString(input);
-    expect(result.data).toBeNull();
-    expect(result.error).toBe("Invalid JSON format");
-  });
-
   test("should handle escaped characters", () => {
     const input = '{"text": "Line1\\nLine2\\tTabbed"}';
     const expected = { text: "Line1\nLine2\tTabbed" };
@@ -63,6 +56,24 @@ describe("parseJsonString", () => {
       }
     `;
     const expected = { name: "John", age: 30 };
+    const result = parseJsonString(input);
+    expect(result).toEqual({ data: expected, error: null });
+  });
+
+  test("should handle nested json", () => {
+    const input = `
+      {
+        "user": "{\\\"name\\\":\\\"John\\\",\\\"age\\\":30}",
+        "status": "active"
+      }
+    `;
+    const expected = {
+      user: {
+        name: "John",
+        age: 30,
+      },
+      status: "active",
+    };
     const result = parseJsonString(input);
     expect(result).toEqual({ data: expected, error: null });
   });

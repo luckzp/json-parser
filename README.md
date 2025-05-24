@@ -4,7 +4,7 @@
   <img src="public/demo.png" alt="JSON Parser Demo" width="800"/>
 </p>
 
-A modern, user-friendly JSON parser and formatter built with Next.js and TypeScript. Try it out at [[demo link](https://json.pengzhang.net/)].
+A powerful JSON parser and formatter that helps you quickly parse and format unformatted JSON data. Perfect for developers working with messy JSON outputs from APIs, logs, or data sources like ELK Stack (Elasticsearch, Logstash, Kibana). Try it out at [[demo link](https://json.pengzhang.net/)].
 
 [![GitHub stars](https://img.shields.io/github/stars/luckzp/json-parser?style=social)](https://github.com/luckzp/json-parser)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -51,10 +51,17 @@ npm run dev
 
 ## 🛠 Usage
 
-1. Enter or paste your JSON data into the left panel
-2. The parser will automatically validate and format your input
-3. Use the collapse/expand buttons to navigate through nested structures
-4. Download or copy the formatted JSON using the toolbar buttons
+1. **Paste unformatted JSON**: Copy messy, single-line JSON from ELK logs, API responses, or any other source into the left panel
+2. **Automatic parsing**: The parser will instantly validate and beautifully format your JSON data
+3. **Navigate easily**: Use the collapse/expand buttons to explore nested structures in complex JSON objects
+4. **Export results**: Download the formatted JSON as a file or copy it to your clipboard
+
+### Perfect for:
+
+- 📊 **ELK Stack logs**: Quickly format JSON logs from Elasticsearch, Logstash, or Kibana
+- 🔌 **API responses**: Clean up messy JSON responses from REST APIs
+- 🐛 **Debugging**: Make unreadable JSON data human-friendly for debugging
+- 📝 **Documentation**: Format JSON examples for documentation or sharing
 
 ## 🎨 Technologies
 

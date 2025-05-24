@@ -1,4 +1,4 @@
-import { parseJsonString } from "@/app/utils/jsonParser";
+import { parseJsonString } from "@/app/utils/jsonUtils";
 
 describe("parseJsonString", () => {
   test("should parse empty string", () => {

@@ -1,0 +1,46 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Development Guidelines
+
+## Code Style & Standards
+- **TypeScript**: Strict mode enabled, use proper typing
+- **React**: Functional components with hooks, use "use client" for client components
+- **Styling**: Tailwind CSS classes, follow shadcn/ui patterns
+- **File Naming**: kebab-case for files, PascalCase for components
+
+## Component Development
+- Place reusable UI components in [components/ui/](mdc:components/ui)
+- App-specific components go in [app/components/](mdc:app/components)
+- Use TypeScript interfaces for props
+- Implement proper error boundaries and loading states
+
+## State Management
+- Use React hooks (useState, useEffect, useRef) for local state
+- Keep state close to where it's used
+- Use proper dependency arrays in useEffect
+
+## Testing
+- Test files in [__tests__/](mdc:__tests__) directory
+- Use Jest with React Testing Library
+- Run tests with `npm run test` or `npm run test:watch`
+- Follow testing best practices for component testing
+
+## Performance
+- Use Next.js App Router features appropriately
+- Implement proper loading and error states
+- Optimize bundle size and avoid unnecessary re-renders
+
+## JSON Processing
+- Use [app/utils/jsonParser.ts](mdc:app/utils/jsonParser.ts) for JSON operations
+- Handle malformed JSON with jsonrepair library
+- Provide clear error messages for invalid JSON
+
+## Styling Guidelines
+- Use Tailwind utility classes
+- Follow responsive design principles
+- Maintain consistent spacing and typography
+- Use shadcn/ui components for common UI elements
+

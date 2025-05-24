@@ -4,12 +4,12 @@ import { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "@/components/ui/button";
 import { FileJson2, FileDown, Copy } from "lucide-react";
-import { parseJsonString } from "@/app/utils/jsonParser";
+import { parseJsonString } from "@/app/utils/jsonUtils";
 import {
   faMinusSquare,
   faPlusSquare,
 } from "@fortawesome/free-regular-svg-icons";
-import TimestampConverter from "./timestamp-converter";
+import TimestampConverter from "./TimestampConverter";
 interface JsonViewerProps {
   data: any;
   level: number;

@@ -1,0 +1,43 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Component Architecture
+
+## Core Components
+
+### JsonParser Component
+- **File**: [app/components/JsonParser.tsx](mdc:app/components/JsonParser.tsx)
+- **Purpose**: Main component handling JSON input, parsing, and display
+- **Key Features**:
+  - Real-time JSON validation and parsing
+  - Textarea input with auto-focus
+  - Error handling and display
+  - Toolbar with format and download actions
+  - Integration with JsonViewer for output display
+
+### JsonViewer Component
+- **Location**: Inside [app/components/JsonParser.tsx](mdc:app/components/JsonParser.tsx)
+- **Purpose**: Recursive component for rendering parsed JSON with tree view
+- **Features**:
+  - Collapsible/expandable nodes
+  - Syntax highlighting by data type
+  - Proper indentation and formatting
+  - Handles arrays, objects, primitives, and null values
+
+### TimestampConverter Component
+- **File**: [app/components/timestamp-converter.tsx](mdc:app/components/timestamp-converter.tsx)
+- **Purpose**: Utility component for converting timestamps
+- **Integration**: Embedded in the JsonParser header area
+
+## UI Components
+- Uses shadcn/ui components from [components/ui/](mdc:components/ui)
+- Button component for toolbar actions
+- Custom styling with Tailwind CSS classes
+
+## Utility Functions
+- **JSON Parsing Logic**: [app/utils/jsonParser.ts](mdc:app/utils/jsonParser.ts)
+- Handles JSON string parsing with error handling
+- Uses jsonrepair library for fixing malformed JSON
+

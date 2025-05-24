@@ -1,0 +1,35 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Configuration Files
+
+## Package Management
+- **[package.json](mdc:package.json)** - Project dependencies, scripts, and metadata
+  - Key dependencies: Next.js 14, React 18, TypeScript, Tailwind CSS
+  - Development dependencies: Jest, ESLint, Testing Library
+  - Scripts: dev, build, start, lint, test, test:watch
+
+## Framework Configuration
+- **[next.config.mjs](mdc:next.config.mjs)** - Next.js configuration
+- **[tsconfig.json](mdc:tsconfig.json)** - TypeScript compiler configuration
+- **[tailwind.config.ts](mdc:tailwind.config.ts)** - Tailwind CSS configuration
+- **[postcss.config.mjs](mdc:postcss.config.mjs)** - PostCSS configuration for Tailwind
+
+## Code Quality & Testing
+- **[.eslintrc.json](mdc:.eslintrc.json)** - ESLint configuration for code linting
+- **[jest.config.js](mdc:jest.config.js)** - Jest testing framework configuration
+- **[jest.setup.js](mdc:jest.setup.js)** - Jest setup file for testing environment
+
+## UI Components
+- **[components.json](mdc:components.json)** - shadcn/ui components configuration
+  - Defines component paths, styling approach, and aliases
+
+## Styling
+- **[app/globals.css](mdc:app/globals.css)** - Global CSS styles and Tailwind directives
+- **[app/layout.tsx](mdc:app/layout.tsx)** - Root layout with global styles and fonts
+
+## Version Control
+- **[.gitignore](mdc:.gitignore)** - Git ignore patterns for Node.js/Next.js projects
+

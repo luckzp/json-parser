@@ -1,0 +1,36 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# JSON Parser Project Overview
+
+This is a modern JSON parser and formatter web application built with Next.js 14, TypeScript, and Tailwind CSS. The project provides real-time JSON parsing, validation, formatting, and visualization with a beautiful tree view.
+
+## Key Features
+- Real-time JSON parsing and validation
+- Beautiful syntax highlighting with collapsible tree view
+- Auto-format JSON data with escape character handling
+- Download and copy functionality
+- Timestamp converter utility
+- User-friendly error messages
+
+## Tech Stack
+- **Framework**: Next.js 14 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS + shadcn/ui components
+- **Icons**: Lucide React + FontAwesome
+- **Testing**: Jest with React Testing Library
+- **JSON Processing**: jsonrepair library
+
+## Main Entry Points
+- [app/page.tsx](mdc:app/page.tsx) - Main application page
+- [app/layout.tsx](mdc:app/layout.tsx) - Root layout with global styles
+- [app/components/JsonParser.tsx](mdc:app/components/JsonParser.tsx) - Core JSON parser component
+
+## Development Commands
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run test` - Run tests
+- `npm run lint` - Run ESLint
+

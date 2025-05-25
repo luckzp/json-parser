@@ -2,14 +2,14 @@
 
 import { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button } from "@/components/ui/button";
-import { FileJson2, FileDown, Copy } from "lucide-react";
-import { parseJsonString } from "@/app/utils/jsonUtils";
 import {
   faMinusSquare,
   faPlusSquare,
 } from "@fortawesome/free-regular-svg-icons";
 import TimestampConverter from "./TimestampConverter";
+import JsonToolbar from "@/app/components/JsonToolbar";
+import { useJsonParser } from "@/app/hooks/useJsonParser";
+
 interface JsonViewerProps {
   data: any;
   level: number;
@@ -111,15 +111,10 @@ const JsonViewer: React.FC<JsonViewerProps> = ({ data, level }) => {
 };
 
 export default function JsonParser() {
-  const [input, setInput] = useState("");
-  const [parsedData, setParsedData] = useState<any>(null);
-  const [error, setError] = useState<string | null>(null);
+  const { input, parsedData, error, setInput, processEscapeChars } =
+    useJsonParser();
+
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const parseJson = (content: string) => {
-    const { data, error } = parseJsonString(content);
-    setParsedData(data);
-    setError(error);
-  };
 
   useEffect(() => {
     // 自动聚焦
@@ -148,46 +143,18 @@ export default function JsonParser() {
       <div className="flex-1 w-full p-8">
         <div className="w-3/4 h-[85vh] mx-auto flex rounded-lg shadow-lg border border-gray-200 overflow-hidden">
           <div className="flex flex-col w-1/2">
-            <div className="flex gap-2 border-b border-border pl-1">
-              <Button
-                variant="ghost"
-                className="h-10 w-10 p-2" // 添加自定义尺寸
-                onClick={() => {
-                  try {
-                    // 处理输入字符串
-                    const processedInput = input.replace(
-                      /\\(["\\/bfnrt])/g,
-                      (_, char) => {
-                        const escapeMap: { [key: string]: string } = {
-                          '"': '"', // 双引号
-                          "\\": "\\", // 反斜杠
-                          "/": "/", // 斜杠
-                          b: "\b", // 退格
-                          f: "\f", // 换页
-                          n: "\n", // 换行
-                          r: "\r", // 回车
-                          t: "\t", // 制表符
-                        };
-                        return escapeMap[char] || char;
-                      }
-                    );
-                    setInput(processedInput);
-                    parseJson(processedInput);
-                  } catch (e) {
-                    setError((e as Error).message);
-                  }
-                }}
-                title="Remove escape characters"
-              >
-                <FileJson2 />
-              </Button>
-            </div>
+            <JsonToolbar
+              data={input}
+              onProcessEscape={() => {
+                processEscapeChars();
+              }}
+              variant="input"
+            />
             <textarea
               value={input}
               ref={textareaRef}
-              onChange={(e) => {
-                setInput(e.target.value);
-                parseJson(e.target.value);
+              onChange={() => {
+                setInput(textareaRef.current?.value || "");
               }}
               placeholder="Please enter the JSON data..."
               className="flex-1 p-4 font-mono text-sm resize-none focus:outline-none "
@@ -195,57 +162,7 @@ export default function JsonParser() {
           </div>
           <div className="w-px bg-gray-200" /> {/* 分割线也相应改变颜色 */}
           <div className="w-1/2 overflow-auto flex flex-col">
-            <div className="flex gap-1 border-b border-border pl-3">
-              <Button
-                variant="ghost"
-                size="lg"
-                className="h-10 w-10 p-2"
-                onClick={() => {
-                  try {
-                    // Create a Blob containing the parsed JSON data
-                    const jsonBlob = new Blob(
-                      [JSON.stringify(parsedData, null, 2)],
-                      {
-                        type: "application/json",
-                      }
-                    );
-                    // Create download link
-                    const downloadUrl = URL.createObjectURL(jsonBlob);
-                    const link = document.createElement("a");
-                    link.href = downloadUrl;
-                    link.download = "data.json";
-                    // Trigger download
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    // Clean up
-                    URL.revokeObjectURL(downloadUrl);
-                  } catch (e) {
-                    setError((e as Error).message);
-                  }
-                }}
-                title="Download"
-              >
-                <FileDown />
-              </Button>
-              <Button
-                variant="ghost"
-                size="lg"
-                className="h-10 w-10 p-2"
-                title="Copy"
-                onClick={() => {
-                  try {
-                    navigator.clipboard.writeText(
-                      JSON.stringify(parsedData, null, 2)
-                    );
-                  } catch (e) {
-                    setError((e as Error).message);
-                  }
-                }}
-              >
-                <Copy />
-              </Button>
-            </div>
+            <JsonToolbar data={parsedData} variant="output" />
             <div className="flex-1 overflow-auto px-6 py-4">
               {error ? (
                 <div className="text-red-500">{error}</div>

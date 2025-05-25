@@ -2,7 +2,7 @@
 
 import React, { useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { FileJson2, FileDown, Copy, Trash2 } from "lucide-react";
+import { FileJson2, FileDown, Copy } from "lucide-react";
 import { JsonValue } from "@/lib/types";
 import { downloadJsonFile, copyToClipboard } from "@/lib/utils/fileUtils";
 import { UI_CONSTANTS, TOOLTIPS } from "@/lib/constants";
